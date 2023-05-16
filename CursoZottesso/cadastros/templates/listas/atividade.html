@@ -1,0 +1,51 @@
+{% extends 'model.html' %}
+{% load static %}
+
+{% block title %}
+        <title>Zay Shop - Lista de Atividades</title>
+{% endblock %}
+
+{% block content %}
+        <section class="container py-5">
+            <div class="row text-center pt-3">
+                <h3>Lista de Atividades</h3>
+            </div>
+            <div class="row text-left pt-3">
+                <p>
+                    <a href='{% url 'cadastrar-atividade' %}' class='btn btn-primary btn-sm' >Cadastrar Atividade</a>
+                </p>
+            </div>
+            <div class='table-responsive'>
+                <table class='table table-striped'>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Pontos</th>
+                        <th>Detalhes</th>
+                        <th>Campo</th>
+                        <th>Opções</th>
+                    </tr>
+                    {% for atividade in object_list %}
+                    <tr>
+                        <th>{{ atividade.descricao }}</th>
+                        <th>{{ atividade.pontos }}</th>
+                        <th>{{ atividade.detalhes }}</th>
+                        <th>{{ atividade.campo }}</th>
+                        <th>
+                            <a href='{% url 'editar-atividade' atividade.pk %}' class='btn btn-warning btn-sm' title='Editar'>
+                                <i class='fa fa-pen' aria-hidden='true'></i>
+                            </a>
+                            <a href='{% url 'deletar-atividade' atividade.pk %}' class='btn btn-danger btn-sm' title='Excluir'>
+                                <i class='fa fa-trash' aria-hidden='true'></i>
+                            </a>
+                        </th>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan='5'>Nenhum registro encontrado.</td>
+                    </tr>
+                    {% endfor %}
+
+                </table>
+            </div>
+        </section>
+{% endblock %}

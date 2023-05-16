@@ -1,0 +1,43 @@
+{% extends 'model.html' %}
+{% load static %}
+
+{% block title %}
+        <title>Zay Shop - Lista de Campos</title>
+{% endblock %}
+
+{% block content %}
+        <section class="container py-5">
+            <div class="row text-center pt-3">
+                <h3>Lista de Campos</h3>
+                <a href='{% url 'cadastrar-campo' %}' class='btn btn-primary btn-sm'>Cadastrar Campo</a>
+            </div>
+            <div class='table-responsive'>
+                <table class='table table-striped'>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Opções</th>
+                    </tr>
+                    {% for campo in object_list %}
+                    <tr>
+                        <th>{{ campo.nome }}</th>
+                        <th>{{ campo.descricao }}</th>
+                        <th>
+                            <a href='{% url 'editar-campo' campo.pk %}' class='btn btn-warning btn-sm' title='Editar'>
+                                <i class='fa fa-pen' aria-hidden='true'></i>
+                            </a>
+                            <a href='{% url 'deletar-campo' campo.pk %}' class='btn btn-danger btn-sm' title='Excluir'>
+                                <i class='fa fa-trash' aria-hidden='true'></i>
+                            </a>
+                        </th>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan='3'>Nenhum registro encontrado.</td>
+                    </tr>
+                    {% endfor %}
+
+                </table>
+            </div>
+        </section>
+{% endblock %}
